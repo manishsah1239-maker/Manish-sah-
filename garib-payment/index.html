@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garib Payment — Nepal</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div class="brand"><span class="logo">₨</span><div><h1>Garib Payment</h1><p>Simple payments for Nepal</p></div></div>
+      <span class="badge">DEMO</span>
+    </header>
+
+    <section class="balance card">
+      <p>Available balance</p>
+      <h2 id="balance">₨ 5,000.00</h2>
+      <div class="actions"><button onclick="showPanel('send')">Send Money</button><button class="secondary" onclick="showPanel('add')">Add Money</button></div>
+    </section>
+
+    <section class="card" id="panel" hidden></section>
+
+    <section class="card">
+      <div class="section-title"><h3>Quick Pay</h3><span>नेपाल</span></div>
+      <div class="quick"><button onclick="quickPay('Mobile Recharge')">📱<small>Recharge</small></button><button onclick="quickPay('Electricity')">💡<small>Electricity</small></button><button onclick="quickPay('Internet')">🌐<small>Internet</small></button><button onclick="quickPay('QR Payment')">▦<small>QR Pay</small></button></div>
+    </section>
+
+    <section class="card"><div class="section-title"><h3>Recent transactions</h3><button class="link" onclick="renderTransactions()">Refresh</button></div><div id="transactions"></div></section>
+    <footer>Prototype only • No real money is moved by this demo.</footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
