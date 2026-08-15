@@ -1,0 +1,10 @@
+let balance=5000;let tx=[{name:'Welcome demo balance',amount:5000,kind:'credit'}];
+function money(n){return '₨ '+n.toLocaleString('en-NP',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function renderTransactions(){document.querySelector('#transactions').innerHTML=tx.slice().reverse().map(t=>`<div class="tx"><div><b>${t.name}</b><small>Demo transaction</small></div><div class="amount" style="color:${t.kind==='credit'?'#176b4d':'#b42318'}">${t.kind==='credit'?'+':'-'}${money(t.amount)}</div></div>`).join('')}
+function showPanel(type){const p=document.querySelector('#panel');p.hidden=false;p.innerHTML=type==='send'?`<div class="section-title"><h3>Send Money</h3><button class="link" onclick="closePanel()">✕</button></div><div class="form"><input id="receiver" placeholder="Receiver mobile number" inputmode="numeric"><input id="sendAmount" placeholder="Amount (NPR)" type="number" min="1"><button onclick="sendMoney()">Continue</button></div>`:`<div class="section-title"><h3>Add Demo Money</h3><button class="link" onclick="closePanel()">✕</button></div><div class="form"><input id="addAmount" placeholder="Amount (NPR)" type="number" min="1"><button onclick="addMoney()">Add to demo balance</button></div>`}
+function closePanel(){document.querySelector('#panel').hidden=true}
+function sendMoney(){const r=document.querySelector('#receiver').value.trim(),a=Number(document.querySelector('#sendAmount').value);if(!r||!a||a<=0)return alert('Enter a mobile number and valid amount.');if(a>balance)return alert('Insufficient demo balance.');balance-=a;tx.push({name:'Sent to '+r,amount:a,kind:'debit'});update()}
+function addMoney(){const a=Number(document.querySelector('#addAmount').value);if(!a||a<=0)return alert('Enter a valid amount.');balance+=a;tx.push({name:'Demo top-up',amount:a,kind:'credit'});update()}
+function quickPay(name){alert(name+' is a demo feature. Connect a licensed Nepal payment provider before using real payments.')}
+function update(){document.querySelector('#balance').textContent=money(balance);renderTransactions();closePanel()}
+renderTransactions();
